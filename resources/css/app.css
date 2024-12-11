@@ -1,0 +1,78 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+    font-family: "Urbanist", sans-serif;
+    font-optical-sizing: auto;
+}
+
+textarea:focus {
+    border: none;
+}
+
+.bg-\[\#C2C2C2\] {
+    background-color: #C2C2C2;
+}
+.bg-\[\#EBEDEB\] {
+    background-color: #EBEDEB;
+    opacity: 0.7;
+}
+
+.text-5xl {
+    font-size: 2.25rem;
+    line-height: 2rem;
+}
+.text-4xl {
+    font-size: 2rem;
+}
+
+.w-min-content {
+    width: min-content;
+}
+.w-max-content {
+    width: max-content;
+}
+.w-fit-content {
+    width: fit-content;
+}
+
+.h-\[70\%\] {
+    height: 70%;
+}
+
+.ps-1 {
+    padding-left: .5rem;
+}
+.ps-2 {
+    padding-left: 1rem;
+}
+.ps-3 {
+    padding-left: 1.5rem;
+}
+.pe-1 {
+    padding-right: .5rem;
+}
+.pe-2 {
+    padding-right: 1rem;
+}
+.pe-3 {
+    padding-right: 1.5rem;
+}
+.pe-4 {
+    padding-right: 2rem;
+}
+.pe-5 {
+    padding-right: 2.5rem;
+}
+.pe-6 {
+    padding-right: 3rem;
+}
+
+.wb-break-word {
+    word-break: break-word;
+}
+
+.overflow-y {
+    overflow-y: auto;
+}
