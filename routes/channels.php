@@ -2,6 +2,7 @@
 
 use App\Models\Chat;
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Broadcast;
 
 Broadcast::channel('App.Models.User.{id}', function ($user, $id) {
@@ -14,11 +15,11 @@ Broadcast::channel('message-channel', function ($user, $id) {
 
 Broadcast::channel('chat-channel.{chat_id}', function (User $user, string $chat_id) {
     $chat           = Chat::find($chat_id);
-    $participants   = json_decode($chat->participants);
+    $participants   = $chat->participants;
     $is_participant = false;
 
     foreach ($participants as $participant) {
-        $participant['id'] === $user->id;
+        if ($participant['id'] === $user->id) $is_participant = true;
     }
 
     return $is_participant;
