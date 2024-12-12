@@ -5,57 +5,94 @@ namespace App\Livewire\Message;
 use App\Events\SendMessage;
 use App\Models\Chat;
 use App\Models\Message;
-use App\Models\User;
-use Illuminate\Database\Eloquent\Collection;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
-use Livewire\Attributes\On;
 use Livewire\Component;
 
 class Send extends Component
 {
+    /**
+     * @var \App\Models\Chat|null
+     */
     public $chat = null;
 
-    public $user = null;
+    /**
+     * @var \App\Models\User|null
+     */
+    public $authenticatedUser = null;
 
-    public $content = '';
+    /**
+     * @var string
+     */
+    public $contentOfNewMessage = '';
 
-    public $messages = null;
+    /**
+     * @var \MongoDB\Collection|mixed|null
+     */
+    public $allMessages = null;
 
+    /**
+     * @param \App\Models\Chat $chat
+     * @return void
+     */
     public function mount(Chat $chat): void
     {
         $chat->load('messages');
 
-        $this->messages = $chat->messages;
-        $this->user     = [
-            'id' => 1,
-            'name' => 'Administrador'
+        $this->allMessages          = $chat->messages;
+        $this->authenticatedUser    = auth()->user();
+    }
+
+    /**
+     * @return array
+     */
+    public function getListeners(): array
+    {
+        return [
+            "echo-private:chat-channel.{$this->chat->id},SendMessage" => 'allMessages',
         ];
     }
 
-    #[On('echo:chat-channel.{chat.id},SendMessage')]
-    public function allMessages($event): void
+    /**
+     * Recebe array com dados recebidos pelo evento e à acrescenta ao array/collection;
+     * 
+     * @param array $event
+     * @return void
+     */
+    public function allMessages(array $event): void
     {
-        $this->messages->push(new Message($event['message']));
+        $newMessage         = new Message($event['message']);
+        $newMessage->_id    = $event['message']['_id'];
+
+        $this->allMessages->push($newMessage);
     }
 
+    /**
+     * Salva mensagem e a dispara para evento.
+     * 
+     * @return void
+     */
     public function sendNewMessage(): void
     {
-        $message_created = Message::create([
+        $messageCreated = Message::create([
             'chat_id'       => $this->chat->id,
-            'sender'        => $this->user,
-            'content'       => $this->content,
+            'sender'        => $this->authenticatedUser->toArray(),
+            'content'       => $this->contentOfNewMessage,
             'viewed_by'     => [],
             'received_by'   => [],
             'created_at'    => now(),
             'updated_at'    => now(),
         ]);
 
-        SendMessage::dispatch($this->chat, $message_created);
+        SendMessage::dispatch($this->chat, $messageCreated);
 
-        $this->content = '';
+        $this->contentOfNewMessage = '';
     }
 
+    /**
+     * Renderiza view.
+     * 
+     * @return \Illuminate\View\View
+     */
     public function render(): View
     {
         return view('livewire.message.send');
