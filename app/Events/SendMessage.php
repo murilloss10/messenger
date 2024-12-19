@@ -2,7 +2,6 @@
 
 namespace App\Events;
 
-use App\Models\Chat;
 use App\Models\Message;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Broadcasting\PrivateChannel;
@@ -25,8 +24,8 @@ class SendMessage implements ShouldBroadcast
      * Create a new event instance.
      */
     public function __construct(
-        public Chat $chat, 
-        public ?Message $message
+        public string $chat_id, 
+        public array $message
     ) {}
 
     /**
@@ -37,7 +36,7 @@ class SendMessage implements ShouldBroadcast
     public function broadcastOn(): array
     {
         return [
-            new PrivateChannel("chat-channel.{$this->chat->id}"),
+            new PrivateChannel("chat-channel.{$this->chat_id}"),
         ];
     }
 }

@@ -3,6 +3,8 @@
 namespace App\Livewire\Message;
 
 use App\Events\SendMessage;
+use App\Jobs\SaveNewMessage;
+use App\Jobs\UpdateLastMessageInChat;
 use App\Models\Chat;
 use App\Models\Message;
 use Illuminate\View\View;
@@ -28,7 +30,7 @@ class Send extends Component
     /**
      * @var \MongoDB\Collection|mixed|null
      */
-    public $allMessages = null;
+    public $allMessages = [];
 
     /**
      * @param \App\Models\Chat $chat
@@ -38,7 +40,7 @@ class Send extends Component
     {
         $chat->load('messages');
 
-        $this->allMessages          = $chat->messages;
+        $this->allMessages          = $chat->messages->toArray();
         $this->authenticatedUser    = auth()->user();
     }
 
@@ -60,10 +62,17 @@ class Send extends Component
      */
     public function allMessages(array $event): void
     {
-        $newMessage         = new Message($event['message']);
-        $newMessage->_id    = $event['message']['_id'];
+        array_push($this->allMessages, $event['message']);
+    }
 
-        $this->allMessages->push($newMessage);
+    public function newMessage()
+    {
+        $this->dispatch('newMessage');
+    }
+
+    public function lastViewedMessage()
+    {
+        dd('mensagem visualizada');
     }
 
     /**
@@ -73,7 +82,7 @@ class Send extends Component
      */
     public function sendNewMessage(): void
     {
-        $messageCreated = Message::create([
+        $message = [
             'chat_id'       => $this->chat->id,
             'sender'        => $this->authenticatedUser->toArray(),
             'content'       => $this->contentOfNewMessage,
@@ -81,9 +90,12 @@ class Send extends Component
             'received_by'   => [],
             'created_at'    => now(),
             'updated_at'    => now(),
-        ]);
+        ];
 
-        SendMessage::dispatch($this->chat, $messageCreated);
+        $message['sender']['id'] = 2;
+        SendMessage::dispatch($this->chat->id, $message);
+        SaveNewMessage::dispatch($message)->onConnection('rabbitmq');
+        UpdateLastMessageInChat::dispatch($this->chat, $this->contentOfNewMessage)->onConnection('rabbitmq');
 
         $this->contentOfNewMessage = '';
     }
