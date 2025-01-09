@@ -54,16 +54,6 @@
             </div>
 
             <div class="flex flex-col gap-2 overflow-y-auto scrollbar-thin pb-1">
-                {{-- @foreach ($chats as $item)
-                    <a href="" class="flex items-center rounded-none gap-2 ps-1 dark:text-neutral-400 dark:hover:bg-white/5 dark:hover:text-neutral-100 text-white">
-                        <img class="size-8 rounded-full object-cover"
-                            src="https://penguinui.s3.amazonaws.com/component-assets/avatar-8.webp" alt="avatar" />
-                        <div>
-                            <p class="text-md font-semibold">{{ $item->chat->users[0]->user->name }}</p>
-                            <p class="text-sm">{{ $item->chat->last_message }}</p>
-                        </div>
-                    </a>
-                @endforeach --}}
                 <livewire:list.conversation :$chats />
             </div>
         </nav>

@@ -67,7 +67,7 @@ class Send extends Component
 
     public function newMessage()
     {
-        $this->dispatch('newMessage');
+        // $this->dispatch('newMessage');
     }
 
     public function lastViewedMessage()

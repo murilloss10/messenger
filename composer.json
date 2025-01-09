@@ -11,6 +11,7 @@
         "laravel/tinker": "^2.9",
         "livewire/livewire": "^3.5",
         "mongodb/laravel-mongodb": "^4.8",
+        "mongodb/mongodb": "^1.20",
         "vladimir-yuldashev/laravel-queue-rabbitmq": "^14.1"
     },
     "require-dev": {
