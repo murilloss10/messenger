@@ -28,52 +28,27 @@
             aria-hidden="true" x-on:click="showSidebar = false" x-transition.opacity></div>
 
         <nav x-cloak
-            class="fixed left-0 z-20 flex h-svh flex-col bg-neutral-100 p-4 transition-transform duration-300 md:w-1/5 md:translate-x-0 md:relative dark:bg-neutral-800"
+            class="fixed left-0 z-20 flex h-svh flex-col bg-neutral-200 p-4 transition-transform duration-300 md:w-1/5 md:translate-x-0 md:relative"
             x-bind:class="{
                 'translate-x-0 w-80 md:w-96': showSidebar, 
                 '-translate-x-60 w-70 md:w-80': !showSidebar
             }"
             aria-label="sidebar navigation">
             
-            <a href="#" class="ml-2 w-fit text-2xl font-bold text-neutral-900 dark:text-neutral-100">
+            <a href="#" class="ml-2 w-fit text-2xl font-bold text-neutral-900">
                 <span class="sr-only">homepage</span>
                 <h2>Messenger</h2>
             </a>
 
-            <div class="relative my-4 flex w-full max-w-xl flex-col gap-1 text-neutral-600">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke="currentColor" fill="none"
-                    stroke-width="2"
-                    class="absolute left-2 top-1/2 size-5 -translate-y-1/2 text-neutral-600/50 dark:text-neutral-400/50"
-                    aria-hidden="true">
-                    <path stroke-linecap="round" stroke-linejoin="round"
-                        d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
-                </svg>
-                <input type="search"
-                    class="w-full rounded-xl bg-white px-2 py-1.5 pl-9 text-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black disabled:cursor-not-allowed disabled:opacity-75 dark:bg-neutral-950/50 dark:focus-visible:outline-white"
-                    name="search" aria-label="Search" placeholder="Search" />
-            </div>
-
-            <div class="flex flex-col gap-2 overflow-y-auto scrollbar-thin pb-1">
-                <livewire:list.conversation :$chats />
-            </div>
+            <livewire:list.conversation :$chats />
         </nav>
 
-        <div class="h-svh overflow-y-auto w-full md:pt-4 md:px-4 dark:bg-neutral-950">
-            <div class="flex justify-center">
-                <div class="h-20 w-full md:w-4/5 flex fixed top-0 items-center justify-between sm:rounded-t-lg rounded-b-lg px-4 dark:bg-neutral-800 mb-5">
-                    <div class="flex items-center">
-                        <img class="size-14 rounded-full object-cover"
-                            src="https://penguinui.s3.amazonaws.com/component-assets/avatar-8.webp" alt="avatar" />
-                        <p class="ml-3 text-2xl text-white font-semibold">Penguin</p>
-                    </div>
-                </div>
-            </div>
-            
+        <div class="h-svh overflow-y-auto w-full md:pt-4 md:px-4">
             {{ $slot }}
         </div>
 
         <button
-            class="fixed right-4 top-4 z-20 rounded-full bg-black p-4 md:hidden text-neutral-100 dark:bg-white dark:text-black"
+            class="fixed right-4 top-4 z-20 rounded-full bg-black p-4 md:hidden text-neutral-100"
             x-on:click="showSidebar = ! showSidebar">
             <svg x-show="showSidebar" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor"
                 class="size-5" aria-hidden="true">

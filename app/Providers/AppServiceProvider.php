@@ -25,16 +25,18 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         Facades\View::composer(['*'], function (View $view) {
-            $userAuth = Auth::check() ? Auth::user() : null;
+            $userAuth   = Auth::check() ? Auth::user() : null;
+            $chats      = null;
 
-            $chats = UserChat::where('user_id', $userAuth->id)
-                ->with([
-                    'chat:id,participants,last_message',
-                    'chat.users' => function ($query) use ($userAuth) {
-                        $query->where('user_id', '<>', $userAuth->id)->with('user:id,name,nick');
-                    },
-                ])
-                ->get();
+                if ($userAuth)
+                $chats = UserChat::where('user_id', $userAuth->id)
+                    ->with([
+                        'chat:id,participants,last_message',
+                        'chat.users' => function ($query) use ($userAuth) {
+                            $query->where('user_id', '<>', $userAuth->id)->with('user:id,name,nick');
+                        },
+                    ])
+                    ->get();
 
             $view->with([
                 'userAuth'  => $userAuth,

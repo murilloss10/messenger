@@ -72,7 +72,7 @@ class Send extends Component
 
     public function lastViewedMessage()
     {
-        dd('mensagem visualizada');
+        //disparar evento para marcar mensagem como visualizada
     }
 
     /**
@@ -92,7 +92,7 @@ class Send extends Component
             'updated_at'    => now(),
         ];
 
-        $message['sender']['id'] = 2;
+        //$message['sender']['id'] = 2;
         SendMessage::dispatch($this->chat->id, $message);
         SaveNewMessage::dispatch($message)->onConnection('rabbitmq');
         UpdateLastMessageInChat::dispatch($this->chat, $this->contentOfNewMessage)->onConnection('rabbitmq');

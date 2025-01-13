@@ -1,3 +1,3 @@
 <x-layouts.app>
-    <livewire:message.send :$chat />
+    <p>colocar aqui uma tela de inicio</p>
 </x-layouts.app>

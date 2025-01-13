@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+[x-cloak] {
+    display: none;
+}
+
 * {
     font-family: "Urbanist", sans-serif;
     font-optical-sizing: auto;
