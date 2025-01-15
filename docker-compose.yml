@@ -47,7 +47,7 @@ services:
     image: mongo:latest
     container_name: messenger_mongo
     ports:
-      - "27017:27017"
+      - "27018:27017"
     volumes:
       - mongo_data:/data/db
     networks:

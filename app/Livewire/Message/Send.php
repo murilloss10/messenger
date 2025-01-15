@@ -92,7 +92,6 @@ class Send extends Component
             'updated_at'    => now(),
         ];
 
-        //$message['sender']['id'] = 2;
         SendMessage::dispatch($this->chat->id, $message);
         SaveNewMessage::dispatch($message)->onConnection('rabbitmq');
         UpdateLastMessageInChat::dispatch($this->chat, $this->contentOfNewMessage)->onConnection('rabbitmq');

@@ -28,19 +28,25 @@
             aria-hidden="true" x-on:click="showSidebar = false" x-transition.opacity></div>
 
         <nav x-cloak
-            class="fixed left-0 z-20 flex h-svh flex-col bg-neutral-200 p-4 transition-transform duration-300 md:w-1/5 md:translate-x-0 md:relative"
+            class="fixed left-0 z-20 flex h-svh flex-col bg-neutral-900 p-4 transition-transform duration-300 md:w-1/5 md:translate-x-0 md:relative"
             x-bind:class="{
                 'translate-x-0 w-80 md:w-96': showSidebar, 
                 '-translate-x-60 w-70 md:w-80': !showSidebar
             }"
             aria-label="sidebar navigation">
-            
-            <a href="#" class="ml-2 w-fit text-2xl font-bold text-neutral-900">
-                <span class="sr-only">homepage</span>
-                <h2>Messenger</h2>
-            </a>
 
-            <livewire:list.conversation :$chats />
+            <div class="flex items-center justify-between">
+                <a href="#" class="ml-2 mt-0 w-fit text-2xl font-bold text-white inline-block align-top">
+                    <h2>Messenger</h2>
+                </a>
+                
+                <form action="{{ route('logout') }}" method="POST">
+                    @csrf
+                    <button type="submit" class="bg-transparent border border-neutral-300 text-white hover:bg-neutral-300 text-sm px-3 py-2 rounded-xl">Sair</button>
+                </form>
+            </div>
+
+            <livewire:list.conversation />
         </nav>
 
         <div class="h-svh overflow-y-auto w-full md:pt-4 md:px-4">
