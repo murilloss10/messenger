@@ -19,7 +19,7 @@
     @livewireScripts
 </head>
 
-<body>
+<body class="bg-neutral-900">
 
     <div x-data="{ showSidebar: true }" class="relative flex w-full flex-col md:flex-row">
         <a class="sr-only" href="#main-content">skip to the main content</a>
@@ -28,7 +28,7 @@
             aria-hidden="true" x-on:click="showSidebar = false" x-transition.opacity></div>
 
         <nav x-cloak
-            class="fixed left-0 z-20 flex h-svh flex-col bg-neutral-900 p-4 transition-transform duration-300 md:w-1/5 md:translate-x-0 md:relative"
+            class="fixed left-0 z-20 flex h-svh flex-col p-4 transition-transform duration-300 w-1/6 md:w-1/5 md:translate-x-0 md:relative rounded rounded-r-xl border-r border-neutral-700 bg-neutral-800"
             x-bind:class="{
                 'translate-x-0 w-80 md:w-96': showSidebar, 
                 '-translate-x-60 w-70 md:w-80': !showSidebar
@@ -36,7 +36,7 @@
             aria-label="sidebar navigation">
 
             <div class="flex items-center justify-between">
-                <a href="#" class="ml-2 mt-0 w-fit text-2xl font-bold text-white inline-block align-top">
+                <a href="{{ route('home') }}" class="ml-2 mt-0 w-fit text-2xl font-bold text-white inline-block align-top">
                     <h2>Messenger</h2>
                 </a>
                 

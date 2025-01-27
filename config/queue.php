@@ -84,13 +84,13 @@ return [
                     'vhost' => env('RABBITMQ_VHOST', '/'),
                 ],
             ],
-            // 'options' => [
-            //     'queue' => [
-            //         'exchange' => 'application-x',
-            //         'exchange_type' => 'topic',
-            //         'exchange_routing_key' => '',
-            //     ],
-            // ],
+            'options' => [
+                'exchange' => [
+                    'name' => 'amq.topic',
+                    'type' => 'topic',
+                    'declare' => true,
+                ],
+            ],
         ],
 
     ],

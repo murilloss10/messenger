@@ -14,7 +14,7 @@ class UpdateLastMessageInChat implements ShouldQueue
      * Create a new job instance.
      */
     public function __construct(
-        protected Chat $chat,
+        protected string $chat_id,
         protected ?string $message
     ) {}
 
@@ -23,7 +23,8 @@ class UpdateLastMessageInChat implements ShouldQueue
      */
     public function handle(): void
     {
-        $this->chat->last_message = $this->message;
-        $this->chat->save();
+        $chat = Chat::select('id', 'last_message')->where('_id', $this->chat_id)->first();
+        $chat->last_message = $this->message;
+        $chat->save();
     }
 }

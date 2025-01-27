@@ -6,7 +6,6 @@ use App\Events\SendMessage;
 use App\Jobs\SaveNewMessage;
 use App\Jobs\UpdateLastMessageInChat;
 use App\Models\Chat;
-use App\Models\Message;
 use Illuminate\View\View;
 use Livewire\Component;
 
@@ -92,9 +91,9 @@ class Send extends Component
             'updated_at'    => now(),
         ];
 
-        SendMessage::dispatch($this->chat->id, $message);
-        SaveNewMessage::dispatch($message)->onConnection('rabbitmq');
-        UpdateLastMessageInChat::dispatch($this->chat, $this->contentOfNewMessage)->onConnection('rabbitmq');
+        SendMessage::dispatch($this->chat->id, $message);        
+        SaveNewMessage::dispatch($message);
+        UpdateLastMessageInChat::dispatch($this->chat->id, $this->contentOfNewMessage);
 
         $this->contentOfNewMessage = '';
     }
