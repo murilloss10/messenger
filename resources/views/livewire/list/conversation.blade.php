@@ -17,9 +17,14 @@
             @if ($chats)
                 @foreach ($chats as $item)
                     <a href="{{ route('chat', $item->id) }}"
-                        class="flex items-center gap-2 px-1 py-2 hover:bg-neutral-700 rounded-xl">
+                        @class([
+                            'bg-neutral-700' => request()->fullUrl() === url(route('chat', $item->id)),
+                            'flex', 'items-center', 'gap-2', 'px-1', 'py-2', 'hover:bg-neutral-700', 'rounded-xl'
+                        ])>
+
                         <img class="size-8 rounded-full object-cover"
                             src="{{ $item->users[0]->user->profile_photo_url }}" alt="avatar" />
+                            
                         <div class="w-full">
                             <p class="text-white text-md font-medium">{{ $item->users[0]->user->name }}</p>
                             <div class="flex justify-between">
