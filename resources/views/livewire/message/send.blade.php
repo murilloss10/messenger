@@ -69,11 +69,15 @@
         <form wire:submit="sendNewMessage"
             class="max-h-44 w-full md:w-4/5 flex fixed bottom-0 items-end justify-between border border-neutral-700 bg-neutral-800 rounded-t-lg">
             <div class="flex w-full items-center px-3 py-2 rounded-b-none rounded-lg">
-                <textarea rows="2" wire:model="contentOfNewMessage"
+                <textarea
+                    rows="2" 
+                    wire:model="contentOfNewMessage"
                     class="block mx-4 p-2.5 w-full text-sm text-gray-900 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500"
-                    placeholder="Sua mensagem..." wire:keydown.enter="sendNewMessage"></textarea>
+                    placeholder="Sua mensagem..."
+                    {{-- wire:keydown.enter="sendNewMessage"  --}}
+                    required></textarea>
                 <button type="submit"
-                    class="inline-flex justify-center p-2 text-blue-600 rounded-full cursor-pointer hover:bg-blue-100">
+                    class="inline-flex justify-center p-2 text-blue-600 rounded-full cursor-pointer hover:bg-blue-100 hover:bg-transparent">
                     <svg class="w-5 h-5 rotate-90 rtl:-rotate-90" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
                         fill="#ffffff" viewBox="0 0 18 20">
                         <path

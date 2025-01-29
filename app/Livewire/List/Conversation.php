@@ -25,11 +25,11 @@ class Conversation extends Component
      */
     public string $search = '';
 
-    #[On('newMessage')]
-    public function newMessage()
-    {
-        dd('teste');
-    }
+    // #[On('newMessage')]
+    // public function newMessage()
+    // {
+    //     dd('teste');
+    // }
 
     /**
      * @return void

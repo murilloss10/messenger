@@ -32,9 +32,20 @@ composer install
 ```
 e:
 ```
-npm run build
+npm install && npm run build
 ```
 
 ### Banco de dados
 
 É de suma importância que crie um arquivo denominado ```database.sqlite``` dentro da pasta raiz ``` database ```.
+
+### Recomendações
+
+Para alterações ou possíveis bugs, entrar dentro do continer ``` messenger_app ``` e rodar :
+```
+npm run build
+```
+e
+```
+php artisan optimize:clear
+```

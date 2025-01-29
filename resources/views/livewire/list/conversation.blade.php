@@ -51,10 +51,10 @@
             
             <div x-cloak x-show="modalIsOpen" x-transition.opacity.duration.200ms x-trap.inert.noscroll="modalIsOpen" @keydown.esc.window="modalIsOpen = false" @click.self="modalIsOpen = false" class="fixed inset-0 z-30 flex items-center justify-center bg-black/20 p-4 pb-8 backdrop-blur-xl sm:items-center lg:p-8" role="dialog" aria-modal="true" aria-labelledby="defaultModalTitle">
                 
-                <div x-show="modalIsOpen" x-transition:enter="transition ease-out duration-200 delay-100 motion-reduce:transition-opacity" x-transition:enter-start="scale-0" x-transition:enter-end="scale-100" class="flex w-screen flex-col gap-4 overflow-hidden rounded-md border border-neutral-300 bg-white text-neutral-600 dark:border-neutral-700 dark:bg-neutral-900 dark:text-neutral-300">
+                <div x-show="modalIsOpen" x-transition:enter="transition ease-out duration-200 delay-100 motion-reduce:transition-opacity" x-transition:enter-start="scale-0" x-transition:enter-end="scale-100" class="flex w-screen flex-col gap-4 overflow-hidden rounded-md border border-neutral-700 bg-neutral-900 text-neutral-300">
                     
-                    <div class="flex items-center justify-between border-b border-neutral-300 bg-neutral-50/60 p-4 dark:border-neutral-700 dark:bg-neutral-950/20">
-                        <h3 id="defaultModalTitle" class="font-semibold tracking-wide text-neutral-900 dark:text-white">Iniciar Nova Conversa</h3>
+                    <div class="flex items-center justify-between border-b p-4 border-neutral-700 bg-neutral-950/20">
+                        <h3 id="defaultModalTitle" class="font-semibold tracking-wide text-white">Iniciar Nova Conversa</h3>
                         <button @click="modalIsOpen = false" aria-label="close modal">
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true" stroke="currentColor" fill="none" stroke-width="1.4" class="w-5 h-5">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/>
@@ -81,9 +81,9 @@
 </div>
 
 <script>
-    document.addEventListener('livewire:init', () => {
-        Livewire.on('newMessage', (event) => {
+    // document.addEventListener('livewire:init', () => {
+        // Livewire.on('newMessage', (event) => {
             //console.log('nova mensagem', event);
-        });
-    });
+        // });
+    // });
 </script>
